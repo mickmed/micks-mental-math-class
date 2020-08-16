@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100vh;
+}
+
+header {
+    height: 10%;
+    background: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    font-family: "Arial";
+}
+.game-body {
+    height: 90%;
+    background: black;
+}
+.equation {
+    height: 15%;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: flex-start;
+    font-size: 3vw;
+    align-items: center;
+}
+
+.operator,
+.numbox,
+.input-wrapper,
+.invisible,
+.check {
+    color: white;
+
+    font-family: Ubuntu;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    /* margin-left:2%; */
+}
+
+.operator,
+.numbox,
+.input-wrapper,
+.check {
+    height: 50%;
+    width: 12%;
+}
+
+.invisible {
+    font-family: Ubuntu;
+    background-color: black;
+    border: 1px solid green;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    text-align: right;
+    padding: 0 5%;
+    font-size: 3vw;
+}
+
+.check {
+    background: blue;
+    justify-content:center;
+    transform:translateX(20%) scale(.8);
+    border-radius:10px;
+    font-size:2vw;
+    /* color:white; */
+    border: 1px solid blue;
+}
