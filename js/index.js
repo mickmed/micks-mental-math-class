@@ -1,40 +1,21 @@
-let qsa = (el) => {
-  return document.querySelectorAll(el)
+let sumArray = (arr) => {
+  let sum = 0
+  arr.forEach((num) => {
+    sum += num
+  })
+  // console.log(sum)
+  return sum
 }
-let qs = (el) => {
-  return document.querySelector(el)
+randomNum = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
-let cecl = (el, className) => {
-  let div = document.createElement(el)
-  div.className = className
-  return div
-}
-let ac = (parent, child) => {
-  return parent.appendChild(child)
-}
-let gameBody = qs(".game-body")
+randomNumEvens = (min, max) => {
+  let num = Math.floor(Math.random() * (max - min + 1)) + min
 
-class Screen {
-  constructor(gameBody) {
-    this.gameBody = qs(".game-body")
-    this.equation = cecl("section", "equation")
-    this.appendEq = ac(this.gameBody, this.equation)
-  }
-
-  appendNum = (num, classname) => {
-    let numbox
-    if (classname === "invisible") {
-      numbox = cecl("div", "input-wrapper")
-      let input = cecl("input", classname)
-      numbox.appendChild(input)
-    } else if (classname === "check") {
-      numbox = cecl("button", classname)
-      numbox.innerText = "check"
-    } else {
-      numbox = cecl("div", classname)
-      numbox.innerText = num
-    }
-    ac(this.appendEq, numbox)
+  if (num % 2 === 0) {
+    return num
+  } else {
+    return this.randomNumEvens(min, max)
   }
 }
 
@@ -64,20 +45,16 @@ class Game {
     this.allCorrect = allCorrect
     this.bonus = bonus
   }
-  randomNum = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
 
- 
   eqVals = () => {
     if (this.bonus === "bonus") {
       console.log(this.value1, this.value2)
       this.firstNum = this.value1
       this.secondNum = this.value2
+    } else {
+      this.firstNum = randomNum(this.value1, this.value2)
+      this.secondNum = randomNum(this.value1, this.value2)
     }
-
-    this.firstNum = this.randomNum(this.value1, this.value2)
-    this.secondNum = this.randomNum(this.value1, this.value2)
 
     if (this.operator === "+") {
       this.answer = this.firstNum + this.secondNum
@@ -99,9 +76,9 @@ class Game {
       "check",
     ]
     let screen = new Screen()
-    let invisibleBoxIdx = this.randomNumEvens(0, numboxes.length - 1)
+    let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
     let invisibleVal = null
-
+    console.log(invisibleBoxIdx)
     numboxes.forEach((num, i) => {
       let classname =
         !isNaN(num) && i === invisibleBoxIdx
@@ -137,18 +114,15 @@ class Game {
     })
   }
 
-  randomNumEvens = (min, max) => {
-    let num = Math.floor(Math.random() * (max - min + 1)) + min
-
-    if (num % 2 === 0) {
-      return num
-    } else {
-      return this.randomNumEvens(min, max)
-    }
-  }
   checkAnswer = async (boxInput, invisibleVal) => {
     if (parseInt(boxInput.value) === invisibleVal) {
       console.log(invisibleVal, this.allCorrect)
+      if (this.bonus === "bonus") {
+        console.log("here")
+        gameBody.innerHTML = "potato"
+        let game = new Game(0, 6, "+", 0, [], [], [], [])
+        return game.eqVals()
+      }
       this.allCorrect.push(invisibleVal)
     } else {
       this.allCorrect.push(false)
@@ -159,7 +133,7 @@ class Game {
     this.equationCount += 1
     console.log(this.secondNumCollect)
     if (this.answerCollect.length < 5) {
-      let game = await new Game(
+      let game = new Game(
         1,
         3,
         "+",
@@ -179,9 +153,9 @@ class Game {
         const bonusLine = cecl("hr", "bonus-line")
         gameBody.appendChild(bonusLine)
         console.log(this.firstNumCollect, this.secondNumCollect)
-        let firstNumSum = numSum(this.firstNumCollect)
-        let secondNumSum = numSum(this.secondNumCollect)
-        let answerSum = numSum(this.answerCollect)
+        let firstNumSum = sumArray(this.firstNumCollect)
+        let secondNumSum = sumArray(this.secondNumCollect)
+        let answerSum = sumArray(this.answerCollect)
         console.log(firstNumSum, secondNumSum, answerSum)
         let bonus = new Game(
           firstNumSum,
@@ -200,14 +174,5 @@ class Game {
   }
 }
 
-let numSum = (arr) => {
-  let sum = 0
-  arr.forEach((num) => {
-    sum += num
-  })
-  // console.log(sum)
-  return sum
-}
-
-let game = new Game(0, 6, "+", 0, [], [], [], [])
+let game = new Game(0, 6, "+", 0, [], [], [], [], 1)
 game.eqVals()
