@@ -1,84 +1,52 @@
-let sumArray = (arr) => {
-  let sum = 0
-  arr.forEach((num) => {
-    sum += num
-  })
-  // console.log(sum)
-  return sum
-}
-randomNum = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-randomNumEvens = (min, max) => {
-  let num = Math.floor(Math.random() * (max - min + 1)) + min
-
-  if (num % 2 === 0) {
-    return num
-  } else {
-    return this.randomNumEvens(min, max)
-  }
-}
-
+let count = 0
+let answer = 0
+const invisibleCollect = []
+const firstNumCollect = []
+const secondNumCollect = []
 //** GAME  **//
 class Game {
-  constructor(
-    a,
-    b,
-    operator,
-    equationCount,
-    firstNumCollect,
-    secondNumCollect,
-    answerCollect,
-    allCorrect,
-    bonus
-  ) {
+  constructor(a, b, operator) {
     this.value1 = a
     this.value2 = b
     this.firstNum = null
     this.secondNum = null
     this.operator = operator
-    this.answer = 0
-    this.equationCount = equationCount
-    this.firstNumCollect = firstNumCollect
-    this.secondNumCollect = secondNumCollect
-    this.answerCollect = answerCollect
-    this.allCorrect = allCorrect
-    this.bonus = bonus
   }
-
-  eqVals = () => {
-    if (this.bonus === "bonus") {
-      console.log(this.value1, this.value2)
-      this.firstNum = this.value1
-      this.secondNum = this.value2
-    } else {
-      this.firstNum = randomNum(this.value1, this.value2)
-      this.secondNum = randomNum(this.value1, this.value2)
-    }
-
+  eqRandomize = () => {
+    console.log('rand')
+    this.firstNum = randomNum(this.value1, this.value2)
+    this.secondNum = randomNum(this.value1, this.value2)
+  }
+  eqBonusRound = () => {
+    this.firstNum = this.value1
+    this.secondNum = this.value2
+    console.log(this.firstNum, this.value1, this.value2)
+    console.log(this.secondNum)
+  }
+  makeEq = () => {
     if (this.operator === "+") {
-      this.answer = this.firstNum + this.secondNum
+      answer = this.firstNum + this.secondNum
     }
     if (this.operator === "-") {
-      this.answer = this.firstNum - this.secondNum
+      answer = this.firstNum - this.secondNum
     }
     if (this.operator === "*") {
-      this.answer = this.firstNum * this.secondNum
+      answer = this.firstNum * this.secondNum
     }
-
-    console.log(this.answer)
+  }
+  appendEq = () => {
+    this.makeEq()
     let numboxes = [
       this.firstNum,
       this.operator,
       this.secondNum,
       "=",
-      this.answer,
+      answer,
       "check",
     ]
     let screen = new Screen()
     let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
     let invisibleVal = null
-    console.log(invisibleBoxIdx)
     numboxes.forEach((num, i) => {
       let classname =
         !isNaN(num) && i === invisibleBoxIdx
@@ -88,91 +56,68 @@ class Game {
           : num === "check"
           ? "check"
           : "operator"
-
       screen.appendNum(num, classname)
-
       if (!isNaN(num) && i === invisibleBoxIdx) {
         invisibleVal = num
       }
     })
     let boxInput = qsa(".invisible")
-    console.log(boxInput)
-    // console.log(boxInput, this.equationCount, boxInput[this.equationCount])
-    boxInput[this.equationCount].focus()
-    // console.trace(boxInput[this.equationCount].focus())
+    boxInput[count].focus()
     let check = qsa(".check")
-    check[this.equationCount].addEventListener("click", async (e) => {
-      this.checkAnswer(boxInput[this.equationCount], invisibleVal)
+    check[count].addEventListener("click", async (e) => {
+      this.checkAnswer(boxInput[count], invisibleVal)
     })
-
-    // console.log(boxInput[this.equationCount], this.equationCount)
-    // console.log(invisibleVal)
-    boxInput[this.equationCount].addEventListener("keydown", async (e) => {
+    boxInput[count].addEventListener("keydown", async (e) => {
+      // console.log("here", boxInput[count], 0, invisibleVal)
       if (e.keyCode === 13) {
-        this.checkAnswer(boxInput[this.equationCount], invisibleVal)
+        this.checkAnswer(boxInput[count], invisibleVal)
       }
     })
   }
-
-  checkAnswer = async (boxInput, invisibleVal) => {
+  checkAnswer = (boxInput, invisibleVal) => {
     if (parseInt(boxInput.value) === invisibleVal) {
-      console.log(invisibleVal, this.allCorrect)
-      if (this.bonus === "bonus") {
-        console.log("here")
-        gameBody.innerHTML = "potato"
-        let game = new Game(0, 6, "+", 0, [], [], [], [])
-        return game.eqVals()
-      }
-      this.allCorrect.push(invisibleVal)
+      invisibleCollect.push(boxInput.value)
     } else {
-      this.allCorrect.push(false)
+      invisibleCollect.push(false)
     }
-    this.firstNumCollect.push(this.firstNum)
-    this.secondNumCollect.push(this.secondNum)
-    this.answerCollect.push(this.answer)
-    this.equationCount += 1
-    console.log(this.secondNumCollect)
-    if (this.answerCollect.length < 5) {
-      let game = new Game(
-        1,
-        3,
-        "+",
-        this.equationCount,
-        this.firstNumCollect,
-        this.secondNumCollect,
-        this.answerCollect,
-        this.allCorrect
-      )
-      game.eqVals()
-    } else {
-      if (
-        this.answerCollect.length === 5 &&
-        !this.answerCollect.includes(false)
-      ) {
-        console.log("bonus")
+    firstNumCollect.push(this.firstNum)
+    secondNumCollect.push(this.secondNum)
+    console.log("ic", invisibleCollect)
+    if (invisibleCollect.length < 5) {
+      count++
+      console.log(count)
+      this.newGame()
+    } else if(invisibleCollect.length === 5) {
+      if (invisibleCollect.includes(false)) {
+        console.log("end")
+      } else {
         const bonusLine = cecl("hr", "bonus-line")
         gameBody.appendChild(bonusLine)
-        console.log(this.firstNumCollect, this.secondNumCollect)
-        let firstNumSum = sumArray(this.firstNumCollect)
-        let secondNumSum = sumArray(this.secondNumCollect)
-        let answerSum = sumArray(this.answerCollect)
-        console.log(firstNumSum, secondNumSum, answerSum)
-        let bonus = new Game(
-          firstNumSum,
-          secondNumSum,
-          "+",
-          this.equationCount,
-          [],
-          [],
-          [],
-          [],
-          "bonus"
-        )
-        bonus.eqVals()
+        count += 1
+        console.log(firstNumCollect)
+        this.newGame("bonus")
       }
+    }else if(invisibleCollect.length > 5){
+      console.log('bonus answer')
+    }
+  }
+  newGame = (bonus) => {
+    if (bonus !== "bonus") {
+      let game = new Game(1, 3, "+", this.allCorrect)
+      game.eqRandomize()
+      game.appendEq()
+    } else {
+      let a = sumArray(firstNumCollect)
+      let b = sumArray(secondNumCollect)
+      console.log(a, b)
+      let game = new Game(a, b, "+")
+     
+     game.eqBonusRound()
+      game.appendEq()
+     
     }
   }
 }
-
-let game = new Game(0, 6, "+", 0, [], [], [], [], 1)
-game.eqVals()
+let game = new Game(0, 6, "+")
+game.eqRandomize()
+game.appendEq()

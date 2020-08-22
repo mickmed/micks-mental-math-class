@@ -72,3 +72,8 @@ header {
     /* color:white; */
     border: 1px solid blue;
 }
+
+.modal-msg{
+    position:absolute;
+    
+}
