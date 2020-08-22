@@ -1,9 +1,30 @@
 class Screen {
-  constructor(gameBody) {
+  constructor() {
     this.gameBody = qs(".game-body")
     this.equation = cecl("section", "equation")
     this.appendEq = ac(this.gameBody, this.equation)
   }
+
+setClassnames=(numboxes)=>{
+  let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
+    let invisibleVal = null
+    numboxes.forEach((num, i) => {
+      let classname =
+        !isNaN(num) && i === invisibleBoxIdx
+          ? "invisible"
+          : !isNaN(num)
+          ? "numbox"
+          : num === "check"
+          ? "check"
+          : "operator"
+      this.appendNum(num, classname)
+      if (!isNaN(num) && i === invisibleBoxIdx) {
+        invisibleVal = num
+      }
+    })
+    return invisibleVal
+}
+
 
   appendNum = (num, classname) => {
     let numbox

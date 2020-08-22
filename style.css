@@ -10,10 +10,12 @@ header {
     height: 10%;
     background: blue;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-size: 5vw;
     font-family: "Arial";
+    padding:0 2vw;
+    color:white;
 }
 .game-body {
     height: 90%;
@@ -75,5 +77,26 @@ header {
 
 .modal-msg{
     position:absolute;
+    top:25%;
+    left:25%;
+    height:50%;
+    width:50%;
+    background:red;
+
+}
+
+.score, .score-total{
+    color:white;
+    font-size:2vw;
     
+}
+.score{
+    margin-left:5vw;
+
+}
+.score-total{
+    width:5vw;
+    display:flex;
+    justify-content: flex-end;
+    transform:translateY(1px);
 }
