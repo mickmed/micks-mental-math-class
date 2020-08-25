@@ -1,25 +1,27 @@
 let count = 0
 let answer = 0
 let score = 0
+let level = 1
 let firstNumTotal = 0
 let secondNumTotal = 0
 const invisibleCollect = []
 const scoreDiv = ac(qs("header"), cecl("div", "score"))
-scoreDiv.innerText = 'score:'
+scoreDiv.innerText = "score:"
 const scoreTotal = ac(qs("header"), cecl("div", "score-total"))
+const checkAnsKey = null
+const checkAnsClk = null
 
 //** GAME  **//
 class Game {
-  constructor(a, b, operator) {
+  constructor(a, b, operator, bonus) {
     this.value1 = a
     this.value2 = b
     this.firstNum = null
     this.secondNum = null
     this.operator = operator
-    
+    this.bonus = bonus
   }
   eqRandomize = () => {
-    console.log("rand")
     this.firstNum = randomNum(this.value1, this.value2)
     this.secondNum = randomNum(this.value1, this.value2)
   }
@@ -39,6 +41,7 @@ class Game {
     }
   }
   appendEq = () => {
+    console.log(count)
     this.makeEq()
     let numboxes = [
       this.firstNum,
@@ -50,73 +53,87 @@ class Game {
     ]
     let screen = new Screen()
     let invisibleVal = screen.setClassnames(numboxes)
-    let boxInput = qsa(".invisible")
-    boxInput[count].focus()
-    qsa(".check")[count].addEventListener("click", async (e) => {
-      this.checkAnswer(boxInput[count], invisibleVal)
-    })
-    boxInput[count].addEventListener("keydown", async (e) => {
-      if (e.keyCode === 13) {
-        this.checkAnswer(boxInput[count], invisibleVal)
-      }
-    })
-  }
-  checkAnswer = (boxInput, invisibleVal) => {
-    console.log(boxInput, invisibleVal)
-    if (parseInt(boxInput.value) === invisibleVal) {
-      invisibleCollect.push(boxInput.value)
+    let boxInput = qsa(".invisible")[count]
+    boxInput.focus()
+    let check = qsa('.check')[count]
+   
 
-      qsa(".check")[count].innerText = 10
-      score += 10
-
-      scoreTotal.innerText = ''
-      scoreTotal.innerText = score    
-    } else {
-      invisibleCollect.push(false)
+    this.checkAnsClk = () => {
+      this.checkAnswer(boxInput, check, invisibleVal)
     }
-    firstNumTotal += this.firstNum
-    secondNumTotal += this.secondNum
-
-    console.log("ic", invisibleCollect)
-    this.checkAnswers()
+    this.checkAnsKey = (e) => {
+      e.keyCode === 13 && this.checkAnswer(boxInput, check, invisibleVal)
+    }
+    check.addEventListener("click", this.checkAnsClk)
+    boxInput.addEventListener("keydown", this.checkAnsKey)
   }
-  checkAnswers = () => {
-    if (invisibleCollect.length < 5) {
-      count++
-      this.newGame()
-    } else if (invisibleCollect.length === 5) {
-      if (invisibleCollect.includes(false)) {
-        console.log("end", firstNum)
-        const modalMessage = new ModalMessage()
-        modalMessage.appendMsg("")
+
+  checkAnswer = (boxInput, check, invisibleVal) => {
+    if (invisibleCollect.length < 6) {
+      if (parseInt(boxInput.value) === invisibleVal) {
+        invisibleCollect.push(boxInput.value)
+        check.innerText = 10
+        score += 10
       } else {
+        invisibleCollect.push(false)
+      }
+
+      firstNumTotal += this.firstNum
+      secondNumTotal += this.secondNum
+
+      this.checkAnswers(boxInput, check)
+    }
+  }
+
+  checkAnswers = (boxInput, check) => {
+    if (invisibleCollect.length < 5) {
+      this.newGame()
+    }
+    if (invisibleCollect.length === 5) {
+      if (!invisibleCollect.includes(false)) {
         const bonusLine = cecl("hr", "bonus-line")
         gameBody.appendChild(bonusLine)
-        count += 1
-        console.log("fri", firstNumCollect)
+
         this.newGame("bonus")
+      } else {
+        this.modalMessage(score, level)
       }
-    } else if (invisibleCollect.length > 5) {
-      console.log("bonus answer")
-      const modalMessage = new ModalMessage()
-      modalMessage.appendMsg()
     }
+
+    if (invisibleCollect.length > 5) {
+      
+      check.innerText = 50
+      score += 40
+      console.log(score)
+      this.modalMessage(score, level)
+    }
+    scoreTotal.innerText = ""
+    scoreTotal.innerText = score
+    console.log(score)
+    check.removeEventListener("click", this.checkAnsClk)
+    boxInput.removeEventListener("keydown", this.checkAnsKey)
   }
   newGame = (bonus) => {
+    count++
+    
     if (bonus !== "bonus") {
-      let game = new Game(1, 3, "+", this.allCorrect)
+      let game = new Game(1, level, "+")
       game.eqRandomize()
       game.appendEq()
     } else {
-      let a = firstNum
-      let b = sumArray(secondNumCollect)
+      let a = firstNumTotal
+      let b = secondNumTotal
       console.log(a, b)
-      let game = new Game(a, b, "+")
+      let game = new Game(a, b, "+", "bonus")
       game.eqBonusRound()
       game.appendEq()
     }
   }
+
+  modalMessage = () => {
+    const modalMessage = new ModalMessage(`score: ${score}`, level)
+  }
 }
-let game = new Game(0, 6, "+")
+let game = new Game(1, level, "+")
 game.eqRandomize()
 game.appendEq()

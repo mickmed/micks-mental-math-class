@@ -8,7 +8,7 @@ body {
 
 header {
     height: 10%;
-    background: blue;
+    background: rgb(17, 107, 25);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -77,14 +77,39 @@ header {
 
 .modal-msg{
     position:absolute;
-    top:25%;
-    left:25%;
-    height:50%;
-    width:50%;
-    background:red;
+    top:15%;
+    left:15%;
+    height:70%;
+    width:70%;
+    background:rgba(67, 37, 102, 0.97);
+    display:flex;
+    justify-content: center;
+    color:white;
+    font-family:arial;
+    font-size:6vw;
+    border-radius:2vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+    
 
 }
+.modal-score-msg{
+    transform:translateY(-20%);
+    
+}
 
+.modal-score{
+    animation:blink 1s infinite;
+    font-size:7vw;
+}
+@keyframes blink{
+    0% { opacity: 1; }
+	50% { opacity: .5; }
+	50.01% { opacity: .51; }
+	100% { opacity: 1; }
+}
 .score, .score-total{
     color:white;
     font-size:2vw;
