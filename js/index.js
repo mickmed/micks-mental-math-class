@@ -4,7 +4,7 @@ let score = 0
 let level = 1
 let firstNumTotal = 0
 let secondNumTotal = 0
-const invisibleCollect = []
+let invisibleCollect = []
 const scoreDiv = ac(qs("header"), cecl("div", "score"))
 scoreDiv.innerText = "score:"
 const scoreTotal = ac(qs("header"), cecl("div", "score-total"))
@@ -41,7 +41,7 @@ class Game {
     }
   }
   appendEq = () => {
-    console.log(count)
+   
     this.makeEq()
     let numboxes = [
       this.firstNum,
@@ -55,8 +55,7 @@ class Game {
     let invisibleVal = screen.setClassnames(numboxes)
     let boxInput = qsa(".invisible")[count]
     boxInput.focus()
-    let check = qsa('.check')[count]
-   
+    let check = qsa(".check")[count]
 
     this.checkAnsClk = () => {
       this.checkAnswer(boxInput, check, invisibleVal)
@@ -101,7 +100,6 @@ class Game {
     }
 
     if (invisibleCollect.length > 5) {
-      
       check.innerText = 50
       score += 40
       console.log(score)
@@ -109,13 +107,13 @@ class Game {
     }
     scoreTotal.innerText = ""
     scoreTotal.innerText = score
-    console.log(score)
+   
     check.removeEventListener("click", this.checkAnsClk)
     boxInput.removeEventListener("keydown", this.checkAnsKey)
   }
   newGame = (bonus) => {
     count++
-    
+
     if (bonus !== "bonus") {
       let game = new Game(1, level, "+")
       game.eqRandomize()
@@ -123,7 +121,7 @@ class Game {
     } else {
       let a = firstNumTotal
       let b = secondNumTotal
-      console.log(a, b)
+      
       let game = new Game(a, b, "+", "bonus")
       game.eqBonusRound()
       game.appendEq()
@@ -132,8 +130,19 @@ class Game {
 
   modalMessage = () => {
     const modalMessage = new ModalMessage(`score: ${score}`, level)
+    let modal = modalMessage.appendMsg()
+    modal.addEventListener("click", () => {
+      gameBody.innerHTML = ''
+      level ++
+      let game = new Game(3,3,'+', count=0, invisibleCollect=[])
+      game.eqRandomize()
+      game.appendEq()
+    })
   }
 }
-let game = new Game(1, level, "+")
-game.eqRandomize()
-game.appendEq()
+const playGame = (a, b) => {
+  let game = new Game(a, b, "+")
+  game.eqRandomize()
+  game.appendEq()
+}
+playGame(1,1)

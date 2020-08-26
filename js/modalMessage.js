@@ -4,7 +4,7 @@ class ModalMessage {
     this.staticMsg = `goto level ${level}`
     this.level = level
     this.modal = cecl("div", "modal-msg")
-    this.appendMsg()
+   
   }
   appendMsg = () => {
     this.modal.innerHTML = ''
@@ -16,9 +16,8 @@ class ModalMessage {
 
     modalScore.innerText = this.staticMsg
     ac(this.modal, modalScore)
-    this.modal.addEventListener('click', ()=>{
-      game = newGame()
-    })
+   
     ac(gameBody, this.modal)
+    return this.modal
   }
 }
