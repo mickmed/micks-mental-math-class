@@ -8,8 +8,14 @@ let invisibleCollect = []
 const scoreDiv = ac(qs("header"), cecl("div", "score"))
 scoreDiv.innerText = "score:"
 const scoreTotal = ac(qs("header"), cecl("div", "score-total"))
+const levelDiv = ac(qs("header"), cecl("div", "level"))
+levelDiv.innerText = "level:"
+const levelTotal = ac(qs("header"), cecl("div", "level-total"))
+levelTotal.innerText = 1
 const checkAnsKey = null
 const checkAnsClk = null
+
+
 
 //** GAME  **//
 class Game {
@@ -20,6 +26,7 @@ class Game {
     this.secondNum = null
     this.operator = operator
     this.bonus = bonus
+   
   }
   eqRandomize = () => {
     this.firstNum = randomNum(this.value1, this.value2)
@@ -77,8 +84,10 @@ class Game {
         invisibleCollect.push(false)
       }
 
+    
       firstNumTotal += this.firstNum
       secondNumTotal += this.secondNum
+   
 
       this.checkAnswers(boxInput, check)
     }
@@ -115,6 +124,8 @@ class Game {
     count++
 
     if (bonus !== "bonus") {
+    
+     
       let game = new Game(1, level, "+")
       game.eqRandomize()
       game.appendEq()
@@ -122,6 +133,7 @@ class Game {
       let a = firstNumTotal
       let b = secondNumTotal
       
+            
       let game = new Game(a, b, "+", "bonus")
       game.eqBonusRound()
       game.appendEq()
@@ -134,14 +146,17 @@ class Game {
     modal.addEventListener("click", () => {
       gameBody.innerHTML = ''
       level ++
-      let game = new Game(3,3,'+', count=0, invisibleCollect=[])
+      levelTotal.innerText = ""
+      levelTotal.innerText = level
+      let game = new Game(level,level,'+', count=0, invisibleCollect=[], firstNumTotal=0, secondNumTotal=0)
       game.eqRandomize()
       game.appendEq()
     })
   }
 }
-const playGame = (a, b) => {
-  let game = new Game(a, b, "+")
+const playGame = (a, b, count) => {
+  count = 0
+  let game = new Game(a, b, "+", count=count)
   game.eqRandomize()
   game.appendEq()
 }
