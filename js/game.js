@@ -1,6 +1,6 @@
 class Game {
   constructor() {
-    this.level = 1
+    this.level = 0
     this.score = 0
     this.invisibleCollect = []
     this.firstNumTotal = 0
@@ -18,18 +18,26 @@ class Game {
     this.timeTotal = ac(qs("header"), cecl("div", "time-total"))
     this.timeTotal.innerText = 0
     this.timeRun = null
+    this.lives = 5
   }
   timer = () => {
     let time = 30
     this.timeRun = setInterval(() => {
       time--
       this.timeTotal.innerText = time
-      time === 0 && this.stopTimer()
+      
+      if(time === 0){
+        this.lives--
+        this.stopTimer()
+      }
+      
+      console.log(this.lives)
       this.timeTotal.style.animation = time === 0 && "blink 1s infinite"
     }, 1000)
   }
   stopTimer = () => {
     clearInterval(this.timeRun)
+    
     const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
     modalMessage.appendMsg()
   }

@@ -18,7 +18,6 @@ class ModalMessage {
 
     ac(gameBody, this.modal)
     this.modal.addEventListener("click", () => {
- 
       this.clickModal()
     })
     return this.modal
@@ -29,23 +28,49 @@ class ModalMessage {
     this.modal.innerHTML = "START GAME"
     ac(gameBody, this.modal)
     this.modal.addEventListener("click", () => {
- 
-      this.clickModal()
+      this.clickModal("start")
+    })
+  }
+  appendGameOverMsg = () => {
+    this.modal.innerHTML = ""
+    let modalStartMsg = cecl("div", "modal-end-msg")
+    this.modal.innerHTML = "<div>GAME OVER</div><div> - restart - </div>"
+    ac(gameBody, this.modal)
+    this.modal.addEventListener("click", () => {
+      this.clickModal("end")
     })
   }
 
-  clickModal=()=>{
+  clickModal = (msg) => {
     // console.log(game.level)
+    let eq
     gameBody.innerHTML = ""
 
     game.levelTotal.innerText = ""
-    game.levelTotal.innerText = game.level + 1
-    game.level++
+
     game.count = 0
     game.invisibleCollect = []
     game.firstNumTotal = 0
     game.secondNumTotal = 0
-    let eq = new Equation(1 * game.level, 10 * game.level, "+")
+    if (msg === "end") {
+      console.log("end")
+      game.level = 0
+      game.lives = 5
+      game.levelTotal.innerText = game.level
+      game.score = 0
+      game.scoreTotal.innerText = 0
+
+      eq = new Equation(1, 10, "+")
+    } else if (msg === "start") {
+      console.log("start")
+      game.levelTotal.innerText = game.level + 1
+      game.level++
+      eq = new Equation(1, 10, "+")
+    } else {
+      game.levelTotal.innerText = game.level + 1
+      game.level++
+      eq = new Equation(1 * game.level, 10 * game.level, "+")
+    }
     eq.eqRandomize()
     eq.appendEq()
     game.timer()

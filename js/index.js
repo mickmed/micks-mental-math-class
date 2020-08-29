@@ -7,7 +7,7 @@ class Equation {
     this.secondNum = null
     this.operator = operator
     this.answer = 0
-    
+
     // this.bonus = bonus
     // this.timeRun = null
   }
@@ -21,6 +21,7 @@ class Equation {
     this.secondNum = this.value2
   }
   makeEq = () => {
+    console.log('liv,lev, sco', game.lives, game.level, game.score, game.scoreTotal, this.value1, this.value2)
     if (this.operator === "+") {
       this.answer = this.firstNum + this.secondNum
     }
@@ -48,7 +49,7 @@ class Equation {
     boxInput.focus()
     let check = qsa(".check")[game.count]
     this.checkAnsClk = () => {
-      console.log("here")
+    
       this.checkAnswer(boxInput, check, invisibleVal)
     }
     this.checkAnsKey = (e) => {
@@ -63,29 +64,39 @@ class Equation {
         game.invisibleCollect.push(boxInput.value)
         check.innerText = 10
         game.score += 10
-       
-        let checkIcon = cecl('div', 'check-mark')
-        checkIcon.innerHTML = '<i class="far fa-check-square"></i>'
-        ac(qsa('.equation')[game.count], checkIcon)
 
+        let checkIcon = cecl("div", "check-mark")
+        checkIcon.innerHTML = '<i class="far fa-check-square"></i>'
+        ac(qsa(".equation")[game.count], checkIcon)
       } else {
         game.invisibleCollect.push(false)
         check.innerText = 0
-        let checkIcon = cecl('div', 'check-mark')
+        let checkIcon = cecl("div", "check-mark")
         checkIcon.innerHTML = '<i class="fas fa-skull-crossbones"></i>'
-        ac(qsa('.equation')[game.count], checkIcon)
-
-
+        ac(qsa(".equation")[game.count], checkIcon)
+        game.lives = game.lives - 1
         
       }
-      game.firstNumTotal += this.firstNum
+      if (game.lives <= 0) {
+        console.log("lives", game.lives)
+        
+        this.modalMessage("end")
+      } else {
+         game.firstNumTotal += this.firstNum
       game.secondNumTotal += this.secondNum
       this.checkAnswers(boxInput, check)
+      }
+     
     }
   }
   checkAnswers = (boxInput, check) => {
+    
+    
+    
+
+
     if (game.invisibleCollect.length < 5) {
-      console.log(game)
+     
       this.newEquation()
     }
     if (game.invisibleCollect.length === 5) {
@@ -94,19 +105,17 @@ class Equation {
         gameBody.appendChild(bonusLine)
         this.newEquation("bonus")
       } else {
-        this.modalMessage(game.score, game.level)
-        clearInterval(this.timeRun)
        
+        this.modalMessage("new game", game.score, game.level)
       }
     }
     if (game.invisibleCollect.length > 5) {
       check.innerText = 50
       game.score += 40
       console.log(game.score)
-      this.modalMessage(game.score, game.level)
-   
+      this.modalMessage("new game", game.score, game.level)
     }
-  
+
     game.scoreTotal.innerText = ""
     game.scoreTotal.innerText = game.score
     check.removeEventListener("click", this.checkAnsClk)
@@ -114,15 +123,12 @@ class Equation {
   }
   newEquation = (bonus) => {
     game.count++
- 
-    if (bonus !== "bonus") {
-      console.log(this.value1, this.value2)
 
+    if (bonus !== "bonus") {
       let eq = new Equation(this.value1, this.value2, "+")
       eq.eqRandomize()
       eq.appendEq()
     } else {
-      
       let a = game.firstNumTotal
       let b = game.secondNumTotal
       console.log(this.value1, this.value2)
@@ -131,15 +137,20 @@ class Equation {
       eq.appendEq()
     }
   }
-  modalMessage = () => {
+  modalMessage = (msg) => {
     game.stopTimer()
-    const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
-    modalMessage.appendMsg()
-    
+    if (msg === "end") {
+      // console.log("end")
+      const modalMessage = new ModalMessage()
+      modalMessage.appendGameOverMsg()
+    } else {
+      const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
+      modalMessage.appendMsg()
+    }
   }
 }
 const modalMessage = new ModalMessage()
-console.log(modalMessage)
+
 modalMessage.appendStartMsg()
 const game = new Game(1, 10)
 
