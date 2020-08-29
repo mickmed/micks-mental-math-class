@@ -20,7 +20,7 @@ class Game {
     this.timeRun = null
   }
   timer = () => {
-    let time = 4
+    let time = 30
     this.timeRun = setInterval(() => {
       time--
       this.timeTotal.innerText = time
@@ -30,7 +30,7 @@ class Game {
   }
   stopTimer = () => {
     clearInterval(this.timeRun)
-    const modalMessage = new ModalMessage(`score: ${game.score}`, game.level + 1)
+    const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
     modalMessage.appendMsg()
   }
 }

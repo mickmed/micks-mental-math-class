@@ -33,8 +33,11 @@ setClassnames=(numboxes)=>{
       let input = cecl("input", classname)
       input.type = 'number'
       input.inputMode = 'numeric'
-      window.innerWidth < 600 && input.pattern="[0-9]*"
-      console.log('vw', window.innerWidth)
+      if(window.innerWidth < 600 ){
+        input.pattern="[0-9]*"
+      }
+      
+      
       numbox.appendChild(input)
     } else if (classname === "check") {
       numbox = cecl("button", classname)

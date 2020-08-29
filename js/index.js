@@ -63,7 +63,7 @@ class Equation {
         game.invisibleCollect.push(boxInput.value)
         check.innerText = 10
         game.score += 10
-        console.log(qs('.equation'))
+       
         let checkIcon = cecl('div', 'check-mark')
         checkIcon.innerHTML = '<i class="far fa-check-square"></i>'
         ac(qsa('.equation')[game.count], checkIcon)
@@ -114,17 +114,19 @@ class Equation {
   }
   newEquation = (bonus) => {
     game.count++
-    console.log(this.count)
-    console.log("here", game.level, "count", this.count)
+ 
     if (bonus !== "bonus") {
-      let eq = new Equation(1, game.level, "+")
+      console.log(this.value1, this.value2)
+
+      let eq = new Equation(this.value1, this.value2, "+")
       eq.eqRandomize()
       eq.appendEq()
     } else {
-      console.log(game)
+      
       let a = game.firstNumTotal
       let b = game.secondNumTotal
-      let eq = new Equation(a, b, "+", "bonus")
+      console.log(this.value1, this.value2)
+      let eq = new Equation(this.value1, this.value2, "+", "bonus")
       eq.eqBonusRound()
       eq.appendEq()
     }
@@ -136,8 +138,11 @@ class Equation {
     
   }
 }
-const game = new Game()
-game.timer()
-const equation = new Equation(1, 2, "+", game)
+const modalMessage = new ModalMessage()
+console.log(modalMessage)
+modalMessage.appendStartMsg()
+const game = new Game(1, 10)
+
+const equation = new Equation(1, 10, "+", game)
 equation.eqRandomize()
 equation.appendEq()

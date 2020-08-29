@@ -132,6 +132,9 @@ header {
     justify-content: flex-end;
     transform: translateY(1px);
 }
+.score-total{
+    margin-left:5%;
+}
 .check-mark {
     /* transform: translateX(50px); */
 }
