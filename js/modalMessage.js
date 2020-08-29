@@ -18,6 +18,28 @@ class ModalMessage {
     ac(this.modal, modalScore)
    
     ac(gameBody, this.modal)
+    this.modal.addEventListener('click', ()=>{
+     console.log(game)
+        gameBody.innerHTML = ""
+        game.level++
+        game.levelTotal.innerText = ""
+        game.levelTotal.innerText = game.level
+        game.count = 0
+        game.invisibleCollect = []
+        game.firstNumTotal = 0
+        game.secondNumTotal = 0
+        let eq = new Equation(
+          game.level,
+          game.level,
+          "+",
+         
+        )
+        eq.eqRandomize()
+        eq.appendEq()
+        game.timer()
+        
+     
+    })
     return this.modal
   }
 }

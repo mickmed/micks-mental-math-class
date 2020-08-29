@@ -7,15 +7,15 @@ body {
 }
 
 header {
-    height: 10%;
+    height: 5%;
     background: rgb(17, 107, 25);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-size: 5vw;
+    font-size: 4vw;
     font-family: "Arial";
-    padding:0 2vw;
-    color:white;
+    padding: 0 2vw;
+    color: white;
 }
 .game-body {
     height: 90%;
@@ -26,7 +26,7 @@ header {
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
-    font-size: 3vw;
+    font-size: 6vw;
     align-items: center;
 }
 
@@ -67,61 +67,108 @@ header {
 
 .check {
     background: blue;
-    justify-content:center;
-    transform:translateX(20%) scale(.8);
-    border-radius:10px;
-    font-size:2vw;
+    justify-content: center;
+    transform: scale(0.8);
+    border-radius: 10px;
+    font-size: 2vw;
     /* color:white; */
     border: 1px solid blue;
+    margin:0 6%;
 }
 
-.modal-msg{
-    position:absolute;
-    top:15%;
-    left:15%;
-    height:70%;
-    width:70%;
-    background:rgba(67, 37, 102, 0.97);
-    display:flex;
+.modal-msg {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    height: 60%;
+    width: 60%;
+    background: rgba(67, 37, 102, 0.97);
+    display: flex;
     justify-content: center;
-    color:white;
-    font-family:arial;
-    font-size:6vw;
-    border-radius:2vw;
-    display:flex;
+    color: white;
+    font-family: arial;
+    font-size: 6vw;
+    border-radius: 2vw;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:space-evenly;
-    
-
+    justify-content: space-evenly;
 }
-.modal-score-msg{
-    transform:translateY(-20%);
-    
+.modal-score-msg {
+    transform: translateY(-20%);
 }
 
-.modal-score{
-    animation:blink 1s infinite;
-    font-size:7vw;
+.modal-score {
+    animation: blink 1s infinite;
+    font-size: 7vw;
 }
-@keyframes blink{
-    0% { opacity: 1; }
-	50% { opacity: .5; }
-	50.01% { opacity: .51; }
-	100% { opacity: 1; }
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    50.01% {
+        opacity: 0.51;
+    }
+    100% {
+        opacity: 1;
+    }
 }
-.score, .score-total, .level, .level-total{
-    color:white;
-    font-size:2vw;
-    
+.score,
+.score-total,
+.level,
+.level-total,
+.time,
+.time-total {
+    color: white;
+    font-size: 2vw;
 }
-.score, .level{
-    margin-left:5vw;
-
+.score,
+.level,
+.time {
+    margin-left: 5vw;
 }
-.score-total, .level-total{
-    width:5vw;
-    display:flex;
+.score-total,
+.level-total,
+.time-total {
+    width: 5vw;
+    display: flex;
     justify-content: flex-end;
-    transform:translateY(1px);
+    transform: translateY(1px);
+}
+
+.check-mark {
+    /* transform: translateX(50px); */
+    
+}
+.far.fa-check-square {
+    font-size: 50px;
+    color: green;
+}
+.fas.fa-skull-crossbones{
+    color: red;
+    margin-left:20%;
+    
+}
+
+@media only screen and (min-width: 600px){
+    header{
+        height:10%;
+    }
+    .equation{
+        font-size:3vw;
+    }
+
+}
+
+@media only screen and (min-width: 900px){
+    header{
+        height:10%;
+    }
+    .equation{
+        font-size:3vw;
+    }
+
 }
