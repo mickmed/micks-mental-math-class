@@ -70,6 +70,7 @@ class Equation {
 
       } else {
         game.invisibleCollect.push(false)
+        check.innerText = 0
         let checkIcon = cecl('div', 'check-mark')
         checkIcon.innerHTML = '<i class="fas fa-skull-crossbones"></i>'
         ac(qsa('.equation')[game.count], checkIcon)

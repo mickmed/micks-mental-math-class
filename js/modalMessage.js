@@ -21,9 +21,10 @@ class ModalMessage {
     this.modal.addEventListener('click', ()=>{
      console.log(game)
         gameBody.innerHTML = ""
-        game.level++
+        
         game.levelTotal.innerText = ""
         game.levelTotal.innerText = game.level
+        game.level++
         game.count = 0
         game.invisibleCollect = []
         game.firstNumTotal = 0

@@ -5,9 +5,8 @@
 body {
     height: 100vh;
 }
-
 header {
-    height: 5%;
+    height: 7%;
     background: rgb(17, 107, 25);
     display: flex;
     justify-content: flex-start;
@@ -22,29 +21,25 @@ header {
     background: black;
 }
 .equation {
-    height: 15%;
+    height: 10%;
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
     font-size: 6vw;
     align-items: center;
 }
-
 .operator,
 .numbox,
 .input-wrapper,
 .invisible,
 .check {
     color: white;
-
     font-family: Ubuntu;
-
     display: flex;
     justify-content: flex-end;
     align-items: center;
     /* margin-left:2%; */
 }
-
 .operator,
 .numbox,
 .input-wrapper,
@@ -52,7 +47,6 @@ header {
     height: 50%;
     width: 12%;
 }
-
 .invisible {
     font-family: Ubuntu;
     background-color: black;
@@ -62,20 +56,21 @@ header {
     display: flex;
     text-align: right;
     padding: 0 5%;
-    font-size: 3vw;
+    font-size: 6vw;
 }
-
+.invisible:focus {
+    outline: 0.5px solid yellow;
+}
 .check {
     background: blue;
     justify-content: center;
     transform: scale(0.8);
     border-radius: 10px;
-    font-size: 2vw;
+    font-size: 3vw;
     /* color:white; */
     border: 1px solid blue;
-    margin:0 6%;
+    margin: 0 6%;
 }
-
 .modal-msg {
     position: absolute;
     top: 20%;
@@ -97,7 +92,6 @@ header {
 .modal-score-msg {
     transform: translateY(-20%);
 }
-
 .modal-score {
     animation: blink 1s infinite;
     font-size: 7vw;
@@ -123,7 +117,7 @@ header {
 .time,
 .time-total {
     color: white;
-    font-size: 2vw;
+    font-size: 3.5vw;
 }
 .score,
 .level,
@@ -138,37 +132,52 @@ header {
     justify-content: flex-end;
     transform: translateY(1px);
 }
-
 .check-mark {
     /* transform: translateX(50px); */
-    
 }
 .far.fa-check-square {
-    font-size: 50px;
+    /* font-size: 50px; */
     color: green;
 }
-.fas.fa-skull-crossbones{
+.fas.fa-skull-crossbones {
     color: red;
-    margin-left:20%;
-    
 }
-
-@media only screen and (min-width: 600px){
-    header{
-        height:10%;
+@media only screen and (min-width: 600px) {
+    header {
+        height: 8%;
+    }
+    .score,
+    .score-total,
+    .level,
+    .level-total,
+    .time,
+    .time-total {
+        color: white;
+        font-size: 3vw;
+    }
+    .equation,
+    .invisible {
+        font-size: 5vw;
     }
     .equation{
-        font-size:3vw;
+        height:15%;
     }
-
 }
-
-@media only screen and (min-width: 900px){
-    header{
-        height:10%;
+@media only screen and (min-width: 900px) {
+    header {
+        height: 10%;
     }
-    .equation{
-        font-size:3vw;
+    .score,
+    .score-total,
+    .level,
+    .level-total,
+    .time,
+    .time-total {
+        color: white;
+        font-size: 3.5vw;
     }
-
+    .equation,
+    .invisible {
+        font-size: 3vw;
+    }
 }
