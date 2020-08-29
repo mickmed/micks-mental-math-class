@@ -3,7 +3,6 @@ const sumArray = (arr) => {
   arr.forEach((num) => {
     sum += num
   })
-  // console.log(sum)
   return sum
 }
 const randomNum = (min, max) => {
@@ -11,7 +10,6 @@ const randomNum = (min, max) => {
 }
 const randomNumEvens = (min, max) => {
   let num = Math.floor(Math.random() * (max - min + 1)) + min
-
   if (num % 2 === 0) {
     return num
   } else {

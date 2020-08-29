@@ -4,9 +4,8 @@ class Screen {
     this.equation = cecl("section", "equation")
     this.appendEq = ac(this.gameBody, this.equation)
   }
-
-setClassnames=(numboxes)=>{
-  let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
+  setClassnames = (numboxes) => {
+    let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
     let invisibleVal = null
     numboxes.forEach((num, i) => {
       let classname =
@@ -23,21 +22,17 @@ setClassnames=(numboxes)=>{
       }
     })
     return invisibleVal
-}
-
-
+  }
   appendNum = (num, classname) => {
     let numbox
     if (classname === "invisible") {
       numbox = cecl("div", "input-wrapper")
       let input = cecl("input", classname)
-      input.type = 'number'
-      input.inputMode = 'numeric'
-      if(window.innerWidth < 600 ){
-        input.pattern="[0-9]*"
+      input.type = "number"
+      input.inputMode = "numeric"
+      if (window.innerWidth < 600) {
+        input.pattern = "[0-9]*"
       }
-      
-      
       numbox.appendChild(input)
     } else if (classname === "check") {
       numbox = cecl("button", classname)

@@ -25,20 +25,21 @@ class Game {
     this.timeRun = setInterval(() => {
       time--
       this.timeTotal.innerText = time
-      
-      if(time === 0){
+      if (time === 0) {
         this.lives--
         this.stopTimer()
       }
-      
-      console.log(this.lives)
       this.timeTotal.style.animation = time === 0 && "blink 1s infinite"
     }, 1000)
   }
   stopTimer = () => {
     clearInterval(this.timeRun)
-    
-    const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
-    modalMessage.appendMsg()
+    if (this.lives === 0) {
+      const modalMessage = new ModalMessage()
+      modalMessage.appendGameOverMsg()
+    } else {
+      const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
+      modalMessage.appendMsg()
+    }
   }
 }

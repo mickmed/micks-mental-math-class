@@ -1,27 +1,21 @@
 class Equation {
   constructor(a, b, operator, game) {
-    // constructor(a, b, operator, bonus, game) {
     this.value1 = a
     this.value2 = b
     this.firstNum = null
     this.secondNum = null
     this.operator = operator
     this.answer = 0
-
-    // this.bonus = bonus
-    // this.timeRun = null
   }
   eqRandomize = () => {
     this.firstNum = randomNum(this.value1, this.value2)
     this.secondNum = randomNum(this.value1, this.value2)
-    // console.log(this.firstNum, this.secondNum, this.answer, game.level)
   }
   eqBonusRound = () => {
     this.firstNum = this.value1
     this.secondNum = this.value2
   }
   makeEq = () => {
-    console.log('liv,lev, sco', game.lives, game.level, game.score, game.scoreTotal, this.value1, this.value2)
     if (this.operator === "+") {
       this.answer = this.firstNum + this.secondNum
     }
@@ -34,7 +28,6 @@ class Equation {
   }
   appendEq = () => {
     this.makeEq()
-    // console.log(this.firstNum, this.secondNum, this.answer)
     let numboxes = [
       this.firstNum,
       this.operator,
@@ -49,7 +42,6 @@ class Equation {
     boxInput.focus()
     let check = qsa(".check")[game.count]
     this.checkAnsClk = () => {
-    
       this.checkAnswer(boxInput, check, invisibleVal)
     }
     this.checkAnsKey = (e) => {
@@ -64,7 +56,6 @@ class Equation {
         game.invisibleCollect.push(boxInput.value)
         check.innerText = 10
         game.score += 10
-
         let checkIcon = cecl("div", "check-mark")
         checkIcon.innerHTML = '<i class="far fa-check-square"></i>'
         ac(qsa(".equation")[game.count], checkIcon)
@@ -75,28 +66,18 @@ class Equation {
         checkIcon.innerHTML = '<i class="fas fa-skull-crossbones"></i>'
         ac(qsa(".equation")[game.count], checkIcon)
         game.lives = game.lives - 1
-        
       }
       if (game.lives <= 0) {
-        console.log("lives", game.lives)
-        
         this.modalMessage("end")
       } else {
-         game.firstNumTotal += this.firstNum
-      game.secondNumTotal += this.secondNum
-      this.checkAnswers(boxInput, check)
+        game.firstNumTotal += this.firstNum
+        game.secondNumTotal += this.secondNum
+        this.checkAnswers(boxInput, check)
       }
-     
     }
   }
   checkAnswers = (boxInput, check) => {
-    
-    
-    
-
-
     if (game.invisibleCollect.length < 5) {
-     
       this.newEquation()
     }
     if (game.invisibleCollect.length === 5) {
@@ -105,17 +86,14 @@ class Equation {
         gameBody.appendChild(bonusLine)
         this.newEquation("bonus")
       } else {
-       
         this.modalMessage("new game", game.score, game.level)
       }
     }
     if (game.invisibleCollect.length > 5) {
       check.innerText = 50
       game.score += 40
-      console.log(game.score)
       this.modalMessage("new game", game.score, game.level)
     }
-
     game.scoreTotal.innerText = ""
     game.scoreTotal.innerText = game.score
     check.removeEventListener("click", this.checkAnsClk)
@@ -123,7 +101,6 @@ class Equation {
   }
   newEquation = (bonus) => {
     game.count++
-
     if (bonus !== "bonus") {
       let eq = new Equation(this.value1, this.value2, "+")
       eq.eqRandomize()
@@ -131,7 +108,6 @@ class Equation {
     } else {
       let a = game.firstNumTotal
       let b = game.secondNumTotal
-      console.log(this.value1, this.value2)
       let eq = new Equation(this.value1, this.value2, "+", "bonus")
       eq.eqBonusRound()
       eq.appendEq()
@@ -140,7 +116,6 @@ class Equation {
   modalMessage = (msg) => {
     game.stopTimer()
     if (msg === "end") {
-      // console.log("end")
       const modalMessage = new ModalMessage()
       modalMessage.appendGameOverMsg()
     } else {
@@ -150,10 +125,8 @@ class Equation {
   }
 }
 const modalMessage = new ModalMessage()
-
 modalMessage.appendStartMsg()
 const game = new Game(1, 10)
-
 const equation = new Equation(1, 10, "+", game)
 equation.eqRandomize()
 equation.appendEq()

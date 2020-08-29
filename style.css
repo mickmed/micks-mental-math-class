@@ -17,7 +17,7 @@ header {
     color: white;
 }
 .game-body {
-    height: 90%;
+    height: 93%;
     background: black;
 }
 .equation {
@@ -25,7 +25,7 @@ header {
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
-    font-size: 6vw;
+    font-size: 4vw;
     align-items: center;
 }
 .operator,
@@ -45,7 +45,10 @@ header {
 .input-wrapper,
 .check {
     height: 50%;
-    width: 12%;
+    width: 15%;
+}
+.operator {
+    width: 10%;
 }
 .invisible {
     font-family: Ubuntu;
@@ -56,7 +59,7 @@ header {
     display: flex;
     text-align: right;
     padding: 0 5%;
-    font-size: 6vw;
+    font-size: 4vw;
 }
 .invisible:focus {
     outline: 0.5px solid yellow;
@@ -69,7 +72,7 @@ header {
     font-size: 3vw;
     /* color:white; */
     border: 1px solid blue;
-    margin: 0 6%;
+    margin: 0 3%;
 }
 .modal-msg {
     position: absolute;
@@ -132,8 +135,8 @@ header {
     justify-content: flex-end;
     transform: translateY(1px);
 }
-.score-total{
-    margin-left:5%;
+.score-total {
+    margin-left: 5%;
 }
 .check-mark {
     /* transform: translateX(50px); */
@@ -149,6 +152,9 @@ header {
     header {
         height: 8%;
     }
+    .game-body {
+        height: 92%;
+    }
     .score,
     .score-total,
     .level,
@@ -162,8 +168,8 @@ header {
     .invisible {
         font-size: 5vw;
     }
-    .equation{
-        height:15%;
+    .equation {
+        height: 15%;
     }
 }
 @media only screen and (min-width: 900px) {
