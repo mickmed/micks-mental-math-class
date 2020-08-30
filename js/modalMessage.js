@@ -8,11 +8,11 @@ class ModalMessage {
   appendMsg = () => {
     this.modal.innerHTML = ""
     let modalLivesMsg = cecl("div", "modal-lives-msg")
-    let modalLives = cecl("div", "modal-lives")
+    // let modalLives = cecl("div", "modal-lives")
     let modalScoreMsg = cecl("div", "modal-score-msg")
-    let modalScore = cecl("div", "modal-score")
-    modalScore.innerText = this.staticMsg
-    ac(this.modal, modalScore)
+    let modalLevel = cecl("div", "modal-level-msg")
+    modalLevel.innerText = this.staticMsg
+    ac(this.modal, modalLevel)
     modalLivesMsg.innerText = `lives: ${game.lives}`
     ac(this.modal, modalLivesMsg)
     modalScoreMsg.innerText = this.message
