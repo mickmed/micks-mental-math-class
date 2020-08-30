@@ -20,9 +20,9 @@ header > div {
     z-index: 2;
 }
 .fish {
-    height: 5%;
+    height: 7%;
     z-index: 1;
-    top: 2%;
+    top: 1%;
     display: none;
     /* animation:fishAnimate 30s; */
 }
@@ -32,7 +32,7 @@ header > div {
     pointer-events: none;
 }
 .equation {
-    height: 12%;
+    height: 15%;
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
