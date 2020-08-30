@@ -32,7 +32,7 @@ header > div {
     pointer-events: none;
 }
 .equation {
-    height: 13%;
+    height: 12%;
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
