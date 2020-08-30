@@ -3,6 +3,7 @@ class ModalMessage {
     this.message = msg
     this.staticMsg = `goto level ${level + 1}`
     this.modal = cecl("div", "modal-msg")
+    this.modal.pointerEvents = 'auto'
   }
   appendMsg = () => {
     this.modal.innerHTML = ""
@@ -29,6 +30,8 @@ class ModalMessage {
     ac(gameBody, this.modal)
     this.modal.addEventListener("click", () => {
       this.clickModal("start")
+   
+
     })
   }
   appendGameOverMsg = () => {
@@ -42,6 +45,7 @@ class ModalMessage {
   }
   clickModal = (msg) => {
     let eq
+    gameBody.style.pointerEvents = 'auto'
     gameBody.innerHTML = ""
     game.levelTotal.innerText = ""
     game.count = 0
@@ -67,5 +71,6 @@ class ModalMessage {
     eq.eqRandomize()
     eq.appendEq()
     game.timer()
+    
   }
 }

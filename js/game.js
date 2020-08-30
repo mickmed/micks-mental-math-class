@@ -17,20 +17,28 @@ class Game {
     this.timeDiv.innerText = "time:"
     this.timeTotal = ac(qs("header"), cecl("div", "time-total"))
     this.timeTotal.innerText = 0
+    this.fish = ac(qs("header"), cecl("img", "fish"))
+    this.fish.src = "/img/fish.png"
+    this.fish.style.position = "absolute"
     this.timeRun = null
     this.lives = 5
   }
   timer = () => {
-    let time = 30
+    let time = 300
+    let fishTime = 0
+    this.fish.style.display = "block"
     this.timeRun = setInterval(() => {
       time--
-      this.timeTotal.innerText = time
+      fishTime++
+      this.timeTotal.innerText = Math.round(time / 10)
+      this.fish.style.animation = "fishAnimate 10s 1s infinite"
+      this.fish.style.left = `${fishTime / 3}%`
       if (time === 0) {
         this.lives--
         this.stopTimer()
       }
       this.timeTotal.style.animation = time === 0 && "blink 1s infinite"
-    }, 1000)
+    }, 100)
   }
   stopTimer = () => {
     clearInterval(this.timeRun)

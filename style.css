@@ -16,9 +16,20 @@ header {
     padding: 0 2vw;
     color: white;
 }
+header > div {
+    z-index: 2;
+}
+.fish {
+    height: 5%;
+    z-index: 1;
+    top: 2%;
+    display: none;
+    /* animation:fishAnimate 30s; */
+}
 .game-body {
     height: 93%;
     background: black;
+    pointer-events: none;
 }
 .equation {
     height: 12%;
@@ -27,6 +38,8 @@ header {
     justify-content: flex-start;
     font-size: 5vw;
     align-items: center;
+    position: relative;
+    /* left: -50%; */
 }
 .operator,
 .numbox,
@@ -91,6 +104,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    pointer-events:auto;
 }
 .modal-score-msg {
     transform: translateY(-20%);
@@ -150,10 +164,14 @@ header {
 }
 @media only screen and (min-width: 600px) {
     header {
+        height: 15%;
+    }
+    .fish {
         height: 8%;
+        top: 7%;
     }
     .game-body {
-        height: 92%;
+        height: 85%;
     }
     .score,
     .score-total,
@@ -176,6 +194,13 @@ header {
     header {
         height: 10%;
     }
+    .fish {
+        height: 6%;
+        top: 5%;
+    }
+    .game-body {
+        height: 90%;
+    }
     .score,
     .score-total,
     .level,
@@ -188,5 +213,30 @@ header {
     .equation,
     .invisible {
         font-size: 3vw;
+    }
+}
+@keyframes fishAnimate {
+    0% {
+        transform: skew(-5deg, -5deg) translateY(0%);
+    }
+    50% {
+        transform: skew(5deg, 5deg) translateY(-30%);
+    }
+    100% {
+        transform: skew(-5deg, -5deg) translateY(0%);
+    }
+}
+
+@keyframes slideEq {
+    from {
+        left: -50%;
+        
+       
+        
+    }
+    to {
+        left: 0;
+       
+        
     }
 }

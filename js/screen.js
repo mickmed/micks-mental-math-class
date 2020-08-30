@@ -2,6 +2,7 @@ class Screen {
   constructor() {
     this.gameBody = qs(".game-body")
     this.equation = cecl("section", "equation")
+   
     this.appendEq = ac(this.gameBody, this.equation)
   }
   setClassnames = (numboxes) => {

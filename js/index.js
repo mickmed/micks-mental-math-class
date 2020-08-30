@@ -37,6 +37,9 @@ class Equation {
       "check",
     ]
     let screen = new Screen()
+    console.log(screen.equation)
+    screen.equation.style.animation = 'slideEq .25s 1'
+   
     let invisibleVal = screen.setClassnames(numboxes)
     let boxInput = qsa(".invisible")[game.count]
     boxInput.focus()
@@ -51,6 +54,7 @@ class Equation {
     boxInput.addEventListener("keydown", this.checkAnsKey)
   }
   checkAnswer = (boxInput, check, invisibleVal) => {
+    qsa('.equation')[game.count].style.background = 'rgb(15,15,0)'
     if (game.invisibleCollect.length < 6) {
       if (parseInt(boxInput.value) === invisibleVal) {
         game.invisibleCollect.push(boxInput.value)
