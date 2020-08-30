@@ -21,11 +21,11 @@ header {
     background: black;
 }
 .equation {
-    height: 10%;
+    height: 12%;
     /* border: 1px solid green; */
     display: flex;
     justify-content: flex-start;
-    font-size: 4vw;
+    font-size: 5vw;
     align-items: center;
 }
 .operator,
@@ -59,7 +59,7 @@ header {
     display: flex;
     text-align: right;
     padding: 0 5%;
-    font-size: 4vw;
+    font-size: 5vw;
 }
 .invisible:focus {
     outline: 0.5px solid yellow;
