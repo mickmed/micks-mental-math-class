@@ -22,6 +22,8 @@ class Game {
     this.fish.style.position = "absolute"
     this.timeRun = null
     this.lives = 5
+    document.addEventListener('touchmove', function() { e.preventDefault(); }, { passive:false });
+
   }
   timer = () => {
     let time = 300

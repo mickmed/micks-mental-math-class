@@ -4,6 +4,7 @@
 }
 body {
     height: 100vh;
+    overflow:hidden;
 }
 header {
     height: 7%;
@@ -27,7 +28,7 @@ header > div {
     /* animation:fishAnimate 30s; */
 }
 .game-body {
-    height: 93%;
+    height: 90%;
     background: black;
     pointer-events: none;
 }
