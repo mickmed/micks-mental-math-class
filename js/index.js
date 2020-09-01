@@ -130,7 +130,7 @@ class Equation {
 }
 const modalMessage = new ModalMessage()
 modalMessage.appendStartMsg()
-const game = new Game(1, 10)
-const equation = new Equation(1, 10, "+", game)
-equation.eqRandomize()
-equation.appendEq()
+// const game = new Game(1, 10)
+// const equation = new Equation(1, 10, "+", game)
+// equation.eqRandomize()
+// equation.appendEq()
