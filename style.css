@@ -90,29 +90,46 @@ header > div {
 }
 .modal-msg {
     position: absolute;
-    top: 20%;
-    left: 20%;
-    height: 60%;
-    width: 60%;
+    top: 12%;
+    left: 2%;
+    height: 85%;
+    width: 96%;
     background: rgba(67, 37, 102, 0.97);
     display: flex;
     justify-content: center;
     color: white;
     font-family: arial;
-    font-size: 6vw;
+    font-size: 4vw;
     border-radius: 2vw;
-    display: flex;
+  
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     pointer-events: auto;
+    border:1px solid white;
+    justify-content: space-evenly;
+    background-image: url('/img/math_board.gif');
+    
+    z-index:2;
+}
+.inner-modal{
+    width:55%;
+    height:55%;
+    border-radius:2vw;
+    border:1px solid green;
+     display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+    align-items:space-between;
+    align-items: center;
+    background:green;
 }
 .modal-score-msg {
     transform: translateY(-20%);
 }
 .modal-level-msg {
     animation: blink 1s infinite;
-    font-size: 7vw;
+    font-size: 5vw;
 }
 @keyframes blink {
     0% {
@@ -133,25 +150,31 @@ header > div {
 .level,
 .level-total,
 .time,
-.time-total {
+.time-total,
+.lives,
+.lives-total {
     color: white;
     font-size: 3.5vw;
 }
 .score,
 .level,
-.time {
-    margin-left: 5vw;
+.time,
+.lives {
+    margin-left: 4vw;
 }
 .score-total,
 .level-total,
-.time-total {
-    width: 5vw;
+.time-total,
+.lives-total {
+    width: 3vw;
     display: flex;
     justify-content: flex-end;
     transform: translateY(1px);
 }
 .score-total {
-    margin-left: 5%;
+    margin-left: 2vw;
+    display:flex;
+    justify-content:flex-start;
 }
 .check-mark {
     /* transform: translateX(50px); */
@@ -212,9 +235,14 @@ header > div {
     .level,
     .level-total,
     .time,
-    .time-total {
+    .time-total,
+    .lives,
+    .lives-total{
         color: white;
         font-size: 2.5vw;
+    }
+    .score, .level, .time, .lives{
+        font-size: 3vw;
     }
     .equation,
     .invisible {
@@ -240,6 +268,7 @@ header > div {
     }
     100% {
         transform: skew(-5deg, -5deg) translateY(0%);
+        display:none;
     }
 }
 @keyframes slideEq {

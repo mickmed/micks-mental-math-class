@@ -7,7 +7,7 @@ class Screen {
    
     this.appendEq = ac(this.gameBody, this.equation)
   }
-  setClassnames = (numboxes) => {
+  setClassnames(numboxes){
     let invisibleBoxIdx = randomNumEvens(0, numboxes.length - 1)
     let invisibleVal = null
     numboxes.forEach((num, i) => {
@@ -26,7 +26,7 @@ class Screen {
     })
     return invisibleVal
   }
-  appendNum = (num, classname) => {
+  appendNum(num, classname){
     let numbox
     if (classname === "invisible") {
       numbox = cecl("div", "input-wrapper")

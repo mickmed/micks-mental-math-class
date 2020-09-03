@@ -7,15 +7,15 @@ class Equation {
     this.operator = operator
     this.answer = 0
   }
-  eqRandomize = () => {
+  eqRandomize() {
     this.firstNum = randomNum(this.value1, this.value2)
     this.secondNum = randomNum(this.value1, this.value2)
   }
-  eqBonusRound = () => {
+  eqBonusRound() {
     this.firstNum = this.value1
     this.secondNum = this.value2
   }
-  makeEq = () => {
+  makeEq() {
     if (this.operator === "+") {
       this.answer = this.firstNum + this.secondNum
     }
@@ -26,7 +26,7 @@ class Equation {
       this.answer = this.firstNum * this.secondNum
     }
   }
-  appendEq = () => {
+  appendEq() {
     this.makeEq()
     let numboxes = [
       this.firstNum,
@@ -38,8 +38,8 @@ class Equation {
     ]
     let screen = new Screen()
     console.log(screen.equation)
-    screen.equation.style.animation = 'slideEq .25s 1'
-   
+    screen.equation.style.animation = "slideEq .25s 1"
+
     let invisibleVal = screen.setClassnames(numboxes)
     let boxInput = qsa(".invisible")[game.count]
     boxInput.focus()
@@ -53,8 +53,8 @@ class Equation {
     check.addEventListener("click", this.checkAnsClk)
     boxInput.addEventListener("keydown", this.checkAnsKey)
   }
-  checkAnswer = (boxInput, check, invisibleVal) => {
-    qsa('.equation')[game.count].style.background = 'rgb(15,15,0)'
+  checkAnswer(boxInput, check, invisibleVal) {
+    qsa(".equation")[game.count].style.background = "rgb(15,15,0)"
     if (game.invisibleCollect.length < 6) {
       if (parseInt(boxInput.value) === invisibleVal) {
         game.invisibleCollect.push(boxInput.value)
@@ -70,6 +70,9 @@ class Equation {
         checkIcon.innerHTML = '<i class="fas fa-skull-crossbones"></i>'
         ac(qsa(".equation")[game.count], checkIcon)
         game.lives = game.lives - 1
+       
+        qs('.lives-total').innerText = game.lives
+        
       }
       if (game.lives <= 0) {
         this.modalMessage("end")
@@ -80,7 +83,7 @@ class Equation {
       }
     }
   }
-  checkAnswers = (boxInput, check) => {
+  checkAnswers(boxInput, check) {
     if (game.invisibleCollect.length < 5) {
       this.newEquation()
     }
@@ -103,7 +106,7 @@ class Equation {
     check.removeEventListener("click", this.checkAnsClk)
     boxInput.removeEventListener("keydown", this.checkAnsKey)
   }
-  newEquation = (bonus) => {
+  newEquation(bonus) {
     game.count++
     if (bonus !== "bonus") {
       let eq = new Equation(this.value1, this.value2, "+")
@@ -117,20 +120,26 @@ class Equation {
       eq.appendEq()
     }
   }
-  modalMessage = (msg) => {
+  modalMessage(msg) {
     game.stopTimer()
-    if (msg === "end") {
-      const modalMessage = new ModalMessage()
-      modalMessage.appendGameOverMsg()
-    } else {
-      const modalMessage = new ModalMessage(`score: ${game.score}`, game.level)
-      modalMessage.appendMsg()
-    }
+    setTimeout(function () {
+      console.log('here')
+      if (msg === "end") {
+        const modalMessage = new ModalMessage()
+        modalMessage.appendGameOverMsg()
+      } else {
+        const modalMessage = new ModalMessage(
+          `score: ${game.score}`,
+          game.level
+        )
+        modalMessage.appendMsg()
+      }
+    }, 1000)
   }
 }
 const modalMessage = new ModalMessage()
 modalMessage.appendStartMsg()
-// const game = new Game(1, 10)
-// const equation = new Equation(1, 10, "+", game)
-// equation.eqRandomize()
-// equation.appendEq()
+const game = new Game(1, 10)
+const equation = new Equation(1, 10, "+", game)
+equation.eqRandomize()
+equation.appendEq()
