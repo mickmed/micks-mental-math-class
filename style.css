@@ -195,7 +195,7 @@ header > div {
     width: 3vw;
     display: flex;
     justify-content: flex-end;
-    transform: translateY(1px);
+    transform: translateY(-3px);
 }
 .score-total, .time-total {
     margin-left: 1vw;
