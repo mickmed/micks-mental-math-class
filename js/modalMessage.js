@@ -2,54 +2,69 @@ class ModalMessage {
   constructor() {
     this.modal = cecl("div", "modal-msg")
     this.modal.pointerEvents = "auto"
-    this.modal.style.animation = 'fadein 2s forwards'
+    this.modal.style.animation = "fadein 2s forwards"
     this.innerModal = cecl("div", "inner-modal")
+    this.innerModal.focus()
   }
 
   appendMsg(msg) {
-    if (msg === "new") {
-      this.modal.innerHTML = ""
-      ac(this.modal, this.innerModal)
-
-      let modalLevel = cecl("div", "modal-level-msg")
-      modalLevel.innerText = `goto level ${game.level + 1}`
-      ac(this.innerModal, modalLevel)
-
-
-      let modalLives = cecl("div", "modal-lives-msg")
-      modalLives.innerText = `lives: ${game.lives}`
-      ac(this.innerModal, modalLives)
-
-      let modalScoreMsg = cecl("div", "modal-score-msg")
-      modalScoreMsg.innerText = `score: ${game.score}`
-    
-
-      ac(this.innerModal, modalScoreMsg)
-      ac(gameBody, this.modal)
-      this.innerModal.addEventListener("click", () => {
-        this.clickModal()
-      })
-      return this.modal
-    } else if (msg === "start") {   
-      this.modal.innerHTML = ""
-      ac(this.modal, this.innerModal)
-      let modalStartMsg = cecl("div", "modal-start-msg")
-      this.innerModal.innerHTML = "START GAME"
-      ac(gameBody, this.modal)
-      this.modal.addEventListener("click", () => {
-        this.clickModal("start")
-      })
+    this.modal.innerHTML = ""
+    ac(this.modal, this.innerModal)
+    if (msg === "start") {
+      let startGame = cecl("div", "start-game")
+      startGame.innerText = "START GAME"
+      ac(this.innerModal, startGame)
+    } else if (msg === "new") {
+      this.newEqMessage(msg)
     } else if (msg === "end") {
-      console.log("endie")
-      this.modal.innerHTML = ""
-      ac(this.modal, this.innerModal)
-      let modalStartMsg = cecl("div", "modal-end-msg")
       this.innerModal.innerHTML = "<div>GAME OVER</div><div> - restart - </div>"
-      ac(gameBody, this.modal)
-      this.innerModal.addEventListener("click", () => {
-        this.clickModal("end")
-      })
     }
+    ac(gameBody, this.modal)
+    this.modal.addEventListener("click", () => {
+      if (msg !== "start") {
+        this.clickModal(msg)
+      } else {
+        this.innerModal.innerHTML = ""
+        let chooseSymbol = cecl("div", "choose-symbol")
+
+        chooseSymbol.innerHTML = "choose symbol"
+
+        ac(this.innerModal, chooseSymbol)
+
+        let plus = cecl("div", "plus-sign")
+        plus.innerText = "+"
+        ac(this.innerModal, plus)
+        plus.addEventListener("click", () => {
+          game.sign = "+"
+          this.clickModal(msg)
+        })
+
+        let minus = cecl("div", "minus-sign")
+        minus.innerText = "-"
+        ac(this.innerModal, minus)
+
+        minus.addEventListener("click", () => {
+          game.sign = "-"
+          this.clickModal(msg)
+        })
+      }
+    })
+  }
+
+  newEqMessage(msg) {
+    let modalLevel = cecl("div", "modal-level-msg")
+    modalLevel.innerText = `goto level ${game.level + 1}`
+    ac(this.innerModal, modalLevel)
+
+    let modalLives = cecl("div", "modal-lives-msg")
+    modalLives.innerText = `lives: ${game.lives}`
+    ac(this.innerModal, modalLives)
+
+    let modalScoreMsg = cecl("div", "modal-score-msg")
+    modalScoreMsg.innerText = `score: ${game.score}`
+    ac(this.innerModal, modalScoreMsg)
+
+    return this.modal
   }
 
   clickModal(msg) {
@@ -69,17 +84,16 @@ class ModalMessage {
       game.livesTotal.innerText = game.lives
       game.score = 0
       game.scoreTotal.innerText = 0
-      eq = new Equation(1, 10, "+")
+      eq = new Equation(1, 10, game.sign)
     } else if (msg === "start") {
       game.levelTotal.innerText = game.level + 1
       game.level++
-      eq = new Equation(1, 10, "+")
+      eq = new Equation(1, 10, game.sign)
     } else {
       game.levelTotal.innerText = game.level + 1
       game.livesTotal.innerText = game.lives
-      console.log(game.livesTotal)
       game.level++
-      eq = new Equation(1 * game.level, 10 * game.level, "+")
+      eq = new Equation(1 * game.level, 10 * game.level, game.sign)
     }
     eq.eqRandomize()
     eq.appendEq()

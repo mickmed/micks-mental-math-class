@@ -5,6 +5,8 @@
 body {
     height: 100vh;
     overflow: hidden;
+    /* max-width: 1400px; */
+    margin:0 auto;
 }
 header {
     height: 10%;
@@ -15,7 +17,8 @@ header {
     font-size: 3.5vw;
     font-family: "Arial";
     padding: 0 2vw;
-    color: white;
+    color: rgb(203, 206, 45);
+    font-weight: bold;
 }
 header > div {
     z-index: 2;
@@ -31,6 +34,7 @@ header > div {
     height: 90%;
     background: black;
     pointer-events: none;
+    width:100%;
 }
 .equation {
     height: 12%;
@@ -155,6 +159,12 @@ header > div {
         opacity: 1;
     }
 }
+.plus-sign{
+    font-size:10vw;
+}
+.minus-sign{
+    font-size:15vw;
+}
 .score,
 .score-total,
 .level,
@@ -165,6 +175,12 @@ header > div {
 .lives-total {
     color: white;
     font-size: 3.5vw;
+}
+.score,.score-total, .time, .time-total{
+    color:rgb(35, 179, 167) !important;
+}
+.level, .level-total, .lives, .lives-total{
+    color:rgb(179, 165, 35) !important;
 }
 .score,
 .level,
@@ -196,6 +212,7 @@ header > div {
 .fas.fa-skull-crossbones {
     color: red;
 }
+
 @media only screen and (min-width: 600px) {
     header {
         height: 12%;
@@ -212,7 +229,9 @@ header > div {
     .level,
     .level-total,
     .time,
-    .time-total {
+    .time-total,
+    .lives,
+    .lives-total {
         color: white;
         font-size: 3vw;
     }

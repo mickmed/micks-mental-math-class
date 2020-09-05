@@ -54,7 +54,8 @@ class Game {
         this.lives--
         qs(".lives-total")
         qs(".lives-total").innerText = game.lives
-        this.stopTimer()
+        this.fish.style.display = 'none'
+        this.stopTimer('new')
       }
       this.timeTotal.style.animation = time === 0 && "blink 1s infinite"
     }, 100)

@@ -113,39 +113,22 @@ class Equation {
   newEquation(bonus) {
     game.count++
     if (bonus !== "bonus") {
-      let eq = new Equation(this.value1, this.value2, "+")
+      let eq = new Equation(this.value1, this.value2, game.sign)
       eq.eqRandomize()
       eq.appendEq()
     } else {
       let a = game.firstNumTotal
       let b = game.secondNumTotal
-      let eq = new Equation(a, b, "+", "bonus")
+      let eq = new Equation(a, b, game.sign, "bonus")
       eq.eqBonusRound()
       eq.appendEq()
     }
   }
-  // modalMessage(msg) {
-  //   game.stopTimer(msg)
-  //   console.log("hew")
-
-  //   // setTimeout(function () {
-  //   //   console.log("hereddd")
-  //   //   if (msg === "end") {
-  //   //     const modalMessage = new ModalMessage()
-  //   //     modalMessage.appendGameOverMsg()
-  //   //   } else {
-  //   //     const modalMessage = new ModalMessage(
-  //   //       `score: ${game.score}`,
-  //   //       game.level
-  //   //     )
-  //   //     modalMessage.appendMsg()
-  //   //   }
-  //   // }, 3000)
-  // }
+ 
 }
 const modalMessage = new ModalMessage()
 modalMessage.appendMsg("start")
 const game = new Game(1, 10)
-const equation = new Equation(1, 10, "+", game)
-equation.eqRandomize()
-equation.appendEq()
+// const equation = new Equation(1, 10, game.sign, game)
+// equation.eqRandomize()
+// equation.appendEq()
