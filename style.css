@@ -7,12 +7,12 @@ body {
     overflow: hidden;
 }
 header {
-    height: 7%;
+    height: 10%;
     background: rgb(17, 107, 25);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-size: 4vw;
+    font-size: 3.5vw;
     font-family: "Arial";
     padding: 0 2vw;
     color: white;
@@ -109,8 +109,18 @@ header > div {
     border:1px solid white;
     justify-content: space-evenly;
     background-image: url('/img/math_board.gif');
-    
+    background-position: center;
+    opacity:0.1;
     z-index:2;
+    /* animation:fadein 1s forward; */
+}
+@keyframes fadein{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
 }
 .inner-modal{
     width:55%;
@@ -171,8 +181,8 @@ header > div {
     justify-content: flex-end;
     transform: translateY(1px);
 }
-.score-total {
-    margin-left: 2vw;
+.score-total, .time-total {
+    margin-left: 1vw;
     display:flex;
     justify-content:flex-start;
 }
@@ -188,14 +198,14 @@ header > div {
 }
 @media only screen and (min-width: 600px) {
     header {
-        height: 15%;
+        height: 12%;
     }
     .fish {
         height: 8%;
         top: 7%;
     }
     .game-body {
-        height: 85%;
+        height: 88%;
     }
     .score,
     .score-total,
@@ -212,6 +222,12 @@ header > div {
     }
     .equation {
         height: 15%;
+    }
+    .modal-msg{
+    top: 14%;
+   
+    height: 83%;
+    
     }
 }
 @media only screen and (min-width: 900px) {
@@ -253,6 +269,8 @@ header > div {
     }
     .modal-msg{
         font-size:2vw;
+        top:13%;
+        height:84%;
     }
     .modal-level-msg{
         font-size:3.5vw;

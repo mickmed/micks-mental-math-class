@@ -70,12 +70,11 @@ class Equation {
         checkIcon.innerHTML = '<i class="fas fa-skull-crossbones"></i>'
         ac(qsa(".equation")[game.count], checkIcon)
         game.lives = game.lives - 1
-       
-        qs('.lives-total').innerText = game.lives
-        
+
+        qs(".lives-total").innerText = game.lives
       }
       if (game.lives <= 0) {
-        this.modalMessage("end")
+       game.stopTimer('end')
       } else {
         game.firstNumTotal += this.firstNum
         game.secondNumTotal += this.secondNum
@@ -83,6 +82,8 @@ class Equation {
       }
     }
   }
+
+  //----CHECK ANSWERS----//
   checkAnswers(boxInput, check) {
     if (game.invisibleCollect.length < 5) {
       this.newEquation()
@@ -93,13 +94,16 @@ class Equation {
         gameBody.appendChild(bonusLine)
         this.newEquation("bonus")
       } else {
-        this.modalMessage("new game", game.score, game.level)
+        game.stopTimer('new')
       }
     }
     if (game.invisibleCollect.length > 5) {
-      check.innerText = 50
-      game.score += 40
-      this.modalMessage("new game", game.score, game.level)
+      if (!game.invisibleCollect.includes(false)) {
+        check.innerText = 50
+        game.score += 40
+        console.log("bonus")
+        game.stopTimer("new")
+      }
     }
     game.scoreTotal.innerText = ""
     game.scoreTotal.innerText = game.score
@@ -115,30 +119,32 @@ class Equation {
     } else {
       let a = game.firstNumTotal
       let b = game.secondNumTotal
-      let eq = new Equation(this.value1, this.value2, "+", "bonus")
+      let eq = new Equation(a, b, "+", "bonus")
       eq.eqBonusRound()
       eq.appendEq()
     }
   }
-  modalMessage(msg) {
-    game.stopTimer()
-    setTimeout(function () {
-      console.log('here')
-      if (msg === "end") {
-        const modalMessage = new ModalMessage()
-        modalMessage.appendGameOverMsg()
-      } else {
-        const modalMessage = new ModalMessage(
-          `score: ${game.score}`,
-          game.level
-        )
-        modalMessage.appendMsg()
-      }
-    }, 1000)
-  }
+  // modalMessage(msg) {
+  //   game.stopTimer(msg)
+  //   console.log("hew")
+
+  //   // setTimeout(function () {
+  //   //   console.log("hereddd")
+  //   //   if (msg === "end") {
+  //   //     const modalMessage = new ModalMessage()
+  //   //     modalMessage.appendGameOverMsg()
+  //   //   } else {
+  //   //     const modalMessage = new ModalMessage(
+  //   //       `score: ${game.score}`,
+  //   //       game.level
+  //   //     )
+  //   //     modalMessage.appendMsg()
+  //   //   }
+  //   // }, 3000)
+  // }
 }
 const modalMessage = new ModalMessage()
-modalMessage.appendStartMsg()
+modalMessage.appendMsg("start")
 const game = new Game(1, 10)
 const equation = new Equation(1, 10, "+", game)
 equation.eqRandomize()
