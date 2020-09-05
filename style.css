@@ -291,8 +291,9 @@ header :nth-child(1){
         color: white;
         font-size: 2.5vw;
     }
-    .score, .level, .time, .lives{
+    .score-total, .level-total, .time-total, .lives-total{
         font-size: 2.5vw;
+        transform:translateY(4%);
     }
     .equation,
     .invisible {
