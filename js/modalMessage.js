@@ -27,12 +27,12 @@ class ModalMessage {
         this.innerModal.innerHTML = ""
         let chooseSymbol = cecl("div", "choose-symbol")
 
-        chooseSymbol.innerHTML = "choose symbol"
+        chooseSymbol.innerHTML = "choose game"
 
         ac(this.innerModal, chooseSymbol)
 
         let plus = cecl("div", "plus-sign")
-        plus.innerText = "+"
+        plus.innerText = "addition"
         ac(this.innerModal, plus)
         plus.addEventListener("click", () => {
           game.sign = "+"
@@ -40,7 +40,7 @@ class ModalMessage {
         })
 
         let minus = cecl("div", "minus-sign")
-        minus.innerText = "-"
+        minus.innerText = "subtraction"
         ac(this.innerModal, minus)
 
         minus.addEventListener("click", () => {

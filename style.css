@@ -12,7 +12,7 @@ header {
     height: 10%;
     background: rgb(17, 107, 25);
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-items: center;
     font-size: 3.5vw;
     font-family: "Arial";
@@ -22,6 +22,9 @@ header {
 }
 header > div {
     z-index: 2;
+}
+header :nth-child(1){
+    font-size:3vw;
 }
 .fish {
     height: 7%;
@@ -133,8 +136,8 @@ header > div {
     border:1px solid green;
      display: flex;
     flex-direction: column;
-    justify-content:space-evenly;
-    align-items:space-between;
+    justify-content:space-around;
+    /* align-items:space-between; */
     align-items: center;
     background:green;
 }
@@ -159,12 +162,15 @@ header > div {
         opacity: 1;
     }
 }
-.plus-sign{
-    font-size:10vw;
+.choose-symbol{
+    color: rgb(203, 206, 45);
+    font-size:5vw;
 }
-.minus-sign{
-    font-size:15vw;
+.plus-sign, .minus-sign{
+    font-size:3.5vw;
+    
 }
+
 .score,
 .score-total,
 .level,
@@ -217,6 +223,9 @@ header > div {
     header {
         height: 12%;
     }
+    header :nth-child(1){
+        text-align:left;
+    }
     .fish {
         height: 8%;
         top: 7%;
@@ -248,6 +257,12 @@ header > div {
     height: 83%;
     
     }
+    /* .plus-sign{
+        font-size:7vw;
+    }
+    .minus-sign{
+        font-size:10vw;
+    } */
 }
 @media only screen and (min-width: 900px) {
    
@@ -277,7 +292,7 @@ header > div {
         font-size: 2.5vw;
     }
     .score, .level, .time, .lives{
-        font-size: 3vw;
+        font-size: 2.5vw;
     }
     .equation,
     .invisible {
@@ -294,6 +309,12 @@ header > div {
     .modal-level-msg{
         font-size:3.5vw;
     }
+    /* .plus-sign{
+        font-size:6vw;
+    }
+    .minus-sign{
+        font-size:6vw;
+    } */
     
 }
 @keyframes fishAnimate {
