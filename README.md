@@ -1,4 +1,4 @@
-Mick Roth***
+Mick Roth
 
 
 # Mick's Mental Math Class
